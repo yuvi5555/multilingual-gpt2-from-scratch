@@ -2,8 +2,9 @@
 
 A decoder-only, GPT-2-small–class language model (**~117M parameters**) built and trained **entirely from scratch** in PyTorch, following the nanoGPT approach of Andrej Karpathy — then extended with multilingual training (**English, Hindi, Marathi**) and a controlled **Rotary Position Embedding (RoPE) vs. learned-positional-embedding** ablation.
 
-> **▶ Live demo:** https://huggingface.co/spaces/YOUR_USERNAME/YOUR_SPACE  
-> **⬇ Trained weights:** https://huggingface.co/yuv05/multilingual-gpt2-scratch-weights  
+> **▶ Live demo:** 
+> **⬇ Trained weights:** https://huggingface.co/yuv05/multilingual-gpt2-scratch-weights
+> **📄 Full report:** [gpt_2 report.pdf](gpt_2_report.pdf)
 
 ---
 
@@ -42,41 +43,46 @@ A decoder-only, GPT-2-small–class language model (**~117M parameters**) built 
 
 ## Honest scope
 
-This is a **base language model**, not a chatbot: it continues text rather than answering questions. Trained on ~262M tokens (~5% of GPT-2's original budget), its output is locally fluent but drifts over long spans — expected at this scale, and consistent with the educational goal of understanding the architecture end-to-end. See [`REPORT.md`](REPORT.md) for full analysis.
+This is a **base language model**, not a chatbot: it continues text rather than answering questions. Trained on ~262M tokens (~5% of GPT-2's original budget), its output is locally fluent but drifts over long spans — expected at this scale, and consistent with the educational goal of understanding the architecture end-to-end. See the [full report](gpt_2_report.pdf) for the complete analysis.
 
 ## Repository contents
 
 | File | What it is |
 |---|---|
-| [`REPORT.md`](REPORT.md) | Full technical report — architecture, method, results, analysis |
-| `train.ipynb` | The from-scratch training notebook (Kaggle) |
+| [gpt_2 report.pdf](gpt_2_report.pdf) | Full technical report — architecture, method, results, analysis |
+| `training.ipynb` | The from-scratch training notebook (Kaggle) |
 | `app.py` | Streamlit demo — generate text, compare both models side by side |
-| `comparison.png` | Training-loss curves |
+| `requirements.txt` | Python dependencies for the demo |
+| `comparison.png` | Training-loss curves (baseline vs. RoPE) |
 | `perplexity_results.json` | Per-language evaluation results |
-| `samples/generations.md` | Selected generation samples in all three languages |
+
+## Live demo
+
+The Streamlit app lets you enter a prompt in English, Hindi, or Marathi and generate a continuation from either model — or **compare baseline vs. RoPE side by side**. It also displays the perplexity table and loss curve.
+
+**Weights are hosted on Hugging Face** ([model repo](https://huggingface.co/yuv05/multilingual-gpt2-scratch-weights)) and downloaded automatically by the app at runtime, so the demo needs no local model files.
+
+> **Note:** the demo runs on Streamlit's free tier. It sleeps after inactivity and takes ~1–2 minutes to warm up on the first visit (downloading the models on cold start), then responds in a few seconds per generation.
+
+**Prompting tip:** this is a base model, so use *openers* rather than questions, and prefer longer in-language prompts (e.g. "भारत एक बहुत बड़ा और विविधतापूर्ण देश है, जहाँ"). Temperature ≈ 0.55 and top-k ≈ 15 give the cleanest, most in-language output.
 
 ## Run the demo locally
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
-cd YOUR_REPO
+git clone https://github.com/yuv05/multilingual-gpt2-from-scratch.git
+cd multilingual-gpt2-from-scratch
 pip install -r requirements.txt
-
-# download the two weight files from the Hugging Face model repo (link above)
-# and place them next to app.py as:
-#   model_baseline_fp16.pt
-#   model_rope_fp16.pt
-# plus the tokenizer files in a tokenizer/ folder
-
 streamlit run app.py
 ```
 
-Or just open the **live demo** link above — no setup required.
+No manual weight download needed — `app.py` pulls the models and tokenizer from the
+[Hugging Face model repo](https://huggingface.co/yuv05/multilingual-gpt2-scratch-weights)
+automatically on first run and caches them locally.
 
 ## Reproduce training
 
-Open `train.ipynb` on Kaggle with a GPU, run top to bottom. It trains both models back-to-back (~8.5h on a T4) and saves all artifacts. Set `use_rope` to switch schemes, or use the combined cell that trains both.
+Open `training.ipynb` on Kaggle with a GPU, run top to bottom. It trains both models back-to-back (~8.5h on a T4) and saves all artifacts. Set `use_rope` to switch schemes, or use the combined cell that trains both.
 
 ---
 
-*Built as an internship capstone. Inspired by Andrej Karpathy's nanoGPT.*
+*Built as an internship capstone by **Yuvraj Rajure**. Inspired by Andrej Karpathy's nanoGPT.*
