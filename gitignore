@@ -1,0 +1,16 @@
+# model weights — hosted on Hugging Face, never commit to GitHub
+*.pt
+*.bin
+*.safetensors
+ckpt_baseline/
+ckpt_rope/
+
+# python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# os
+.DS_Store
