@@ -3,7 +3,9 @@
 A decoder-only, GPT-2-small–class language model (**~117M parameters**) built and trained **entirely from scratch** in PyTorch, following the nanoGPT approach of Andrej Karpathy — then extended with multilingual training (**English, Hindi, Marathi**) and a controlled **Rotary Position Embedding (RoPE) vs. learned-positional-embedding** ablation.
 
 > ** Live demo:** https://multilingual-gpt2-from-scratch-svczfr4nsagzkrdvqbhybg.streamlit.app/
+> 
 > ** Trained weights:** https://huggingface.co/yuv05/multilingual-gpt2-scratch-weights
+> 
 > ** Full report:** [gpt_2 report.pdf](gpt_2_report.pdf)
 
 ---
