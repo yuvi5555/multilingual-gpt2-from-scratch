@@ -2,9 +2,9 @@
 
 A decoder-only, GPT-2-small–class language model (**~117M parameters**) built and trained **entirely from scratch** in PyTorch, following the nanoGPT approach of Andrej Karpathy — then extended with multilingual training (**English, Hindi, Marathi**) and a controlled **Rotary Position Embedding (RoPE) vs. learned-positional-embedding** ablation.
 
-> **▶ Live demo:** 
-> **⬇ Trained weights:** https://huggingface.co/yuv05/multilingual-gpt2-scratch-weights
-> **📄 Full report:** [gpt_2 report.pdf](gpt_2_report.pdf)
+> ** Live demo:** https://multilingual-gpt2-from-scratch-svczfr4nsagzkrdvqbhybg.streamlit.app/
+> ** Trained weights:** https://huggingface.co/yuv05/multilingual-gpt2-scratch-weights
+> ** Full report:** [gpt_2 report.pdf](gpt_2_report.pdf)
 
 ---
 
@@ -69,7 +69,7 @@ The Streamlit app lets you enter a prompt in English, Hindi, or Marathi and gene
 ## Run the demo locally
 
 ```bash
-git clone https://github.com/yuv05/multilingual-gpt2-from-scratch.git
+git clone https://github.com/yuvi5555/multilingual-gpt2-from-scratch.git
 cd multilingual-gpt2-from-scratch
 pip install -r requirements.txt
 streamlit run app.py
